@@ -1,10 +1,15 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
 
 ---@type LazySpec
 return {
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = function(_, opts)
+      opts.filesystem.group_empty_dirs = true
+      return opts
+    end,
+  },
 
   -- == Examples of Adding Plugins ==
 
@@ -15,6 +20,27 @@ return {
     config = function() require("lsp_signature").setup() end,
   },
 
+  {
+    url = "zihongh@git.amazon.com:pkg/NinjaHooks",
+    branch = "mainline",
+    lazy = false,
+    config = function(plugin)
+      vim.opt.rtp:prepend(plugin.dir .. "/configuration/vim/amazon/brazil-config")
+      -- Make my own filetype thing to override neovim applying ".conf" file type.
+      -- You may or may not need this depending on your setup.
+      vim.filetype.add({
+        filename = {
+          ['Config'] = function()
+            vim.b.brazil_package_Config = 1
+            return 'brazil-config'
+          end,
+        },
+      })
+    end,
+  },
+
+  "mfussenegger/nvim-jdtls",
+
   -- == Examples of Overriding Plugins ==
 
   -- customize alpha options
@@ -23,24 +49,18 @@ return {
     opts = function(_, opts)
       -- customize the dashboard header
       opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
+        "███    ██ ██    ██ ██ ███    ███",
+        "████   ██ ██    ██ ██ ████  ████",
+        "██ ██  ██ ██    ██ ██ ██ ████ ██",
+        "██  ██ ██  ██  ██  ██ ██  ██  ██",
+        "██   ████   ████   ██ ██      ██",
       }
       return opts
     end,
   },
 
   -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
+  -- { "max397574/better-escape.nvim", enabled = false },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {

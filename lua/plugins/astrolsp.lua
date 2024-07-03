@@ -39,11 +39,20 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      "barium"
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      barium = {
+        cmd = {'barium'};
+        filetypes = {'brazil-config'};
+        root_dir = function(fname)
+          return require("lspconfig").util.find_git_ancestor(fname)
+        end;
+        settings = {};
+      }
     },
     -- customize how language servers are attached
     handlers = {
