@@ -6,15 +6,18 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.cpp" },
+  -- { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.bash" },
-  { import = "astrocommunity.pack.cmake" },
-  { import = "astrocommunity.pack.json" },
-  { import = "astrocommunity.pack.python" },
+  -- { import = "astrocommunity.pack.cmake" },
+  -- { import = "astrocommunity.pack.json" },
+  -- { import = "astrocommunity.pack.python" },
+  -- { import = "astrocommunity.pack.ruby" },
   -- { import = "astrocommunity.debugging.persistent-breakpoints-nvim" },
   -- { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
 
-  { import = "astrocommunity.completion.codeium-vim" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
+
+  -- { import = "astrocommunity.completion.codeium-vim" },
 
   { import = "astrocommunity.motion.nvim-surround" },
 
@@ -27,5 +30,5 @@ return {
     },
   },
   -- { import = "astrocommunity.scrolling.satellite-nvim" },  -- require neovim v0.10
-  { import = "astrocommunity.utility.noice-nvim" },
+  -- { import = "astrocommunity.utility.noice-nvim" },
 }
